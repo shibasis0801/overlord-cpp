@@ -1,10 +1,11 @@
-#include <bits/stdc++.h>
 
 using namespace std;
 
 template <class T>
 struct functional_vector {
-    
+
+    vector<T> data;
+
     // Create something that will be efficient, fills gaps in STL and makes programming easier.
     // Use macros and as much as C++ infrastructure as required. 
     // End result must be simple, fast and configurable.

@@ -10,6 +10,7 @@ using std::transform;
 
 namespace ovd {
 
+
     template <class T>
     struct stream {
         vector<T> data;
