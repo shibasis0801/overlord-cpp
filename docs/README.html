@@ -1,0 +1,32 @@
+<h1 id="overlord-c-library">Overlord C++ library</h1>
+<p>These are a set of header files and implementations being designed by me to simplify and accelerate C++ development.</p>
+<h1 id="example-usage">Example Usage</h1>
+<h2 id="range-inspired-from-python">Range (Inspired from python)</h2>
+<p>range(start, stop, stride)</p>
+<p>A range is a datatype you can use in range for loops. It is made with only primitive data and some simple functions stiched together. As a result it is very fast.</p>
+<h3 id="basic">Basic</h3>
+<pre><code class="language-cpp">for (int i : range(0, 10))
+    cout &lt;&lt; i &lt;&lt; &quot;, &quot;;</code></pre>
+<p>will print </p>
+<p>0, 1, 2, 3, 4, 5, 6, 7, 8, 9,</p>
+<p>Python equivalent</p>
+<pre><code class="language-python">    for i in range(0, 10):
+        print(f&quot;{i}, &quot;, end=&#39;&#39;)</code></pre>
+<h3 id="with-custom-step">With custom step</h3>
+<pre><code class="language-cpp">for (int i : range(0, 10).step(2))
+    cout &lt;&lt; i &lt;&lt; &quot;, &quot;;</code></pre>
+<p>will print</p>
+<p>0, 2, 4, 6, 8</p>
+<h4 id="python-equivalent">Python equivalent</h4>
+<pre><code class="language-python">for i in range(0, 10, 2):
+    print(f&quot;{i}, &quot;, end=&#39;&#39;)</code></pre>
+<h4 id="or">Or</h4>
+<pre><code class="language-python">for i in range(0, 10)[::2]:
+    print(f&quot;{i}, &quot;, end=&#39;&#39;)</code></pre>
+<h3 id="reverse">Reverse</h3>
+<pre><code class="language-cpp">for (int i : range(10, 0).step(-1))
+    cout &lt;&lt; i &lt;&lt; &quot;, &quot;;</code></pre>
+<h4 id="python-equivalent-1">Python equivalent</h4>
+<pre><code class="language-python">for i in range(10, 0, -1)
+    print(f&quot;{i}, &quot;, end=&#39;&#39;)</code></pre>
+<p>Lots more documentation to come.</p>

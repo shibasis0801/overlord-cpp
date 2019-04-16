@@ -30,3 +30,6 @@
 *.exe
 *.out
 *.app
+
+# Add Other node gitignores
+node_modules/
