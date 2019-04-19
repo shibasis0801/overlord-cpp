@@ -6,4 +6,3 @@ structureJSON = open('structure.json').read()
 structure = json.loads(structureJSON)
 
 print(structure)
-
