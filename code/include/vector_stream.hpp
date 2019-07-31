@@ -1,5 +1,5 @@
-#ifndef STREAM_HPP
-#define STREAM_HPP
+#ifndef VECTOR_STREAM_HPP
+#define VECTOR_STREAM_HPP
 
 #include "macro.hpp"
 #include <vector>
