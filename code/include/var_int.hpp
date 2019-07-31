@@ -18,14 +18,6 @@ using namespace std;
 #define all(v) v.begin(), v.end()
 #define r_all(v) v.rbegin(), v.rend()
 
-inline decltype(auto) maxref(auto &x, auto &y) {
-    return (x > y) ? x : y; 
-}
-
-inline decltype(auto) minref(auto &x, auto &y) {
-    return (x < y) ? x : y; 
-}
-
 struct var_int {
     vector<int> number;
 
@@ -40,11 +32,20 @@ struct var_int {
         );
     }
 
-
-    inline int& operator[](int idx) {
+    int& at(int idx) {
         if(idx < 0 || idx >= number.size())
             throw runtime_error("Out of Bounds\n");
         return number[idx];
+    }
+    
+    const int& at(int idx) const {
+        if(idx < 0 || idx >= number.size())
+            throw runtime_error("Out of Bounds\n");
+        return number[idx];
+    }
+
+    inline int& operator[](int idx) {
+        return at(idx);
     }
 
     var_int operator+(const var_int &other) {
@@ -79,6 +80,7 @@ struct var_int {
     friend var_int operator+(long long num, const var_int &vint);
     friend istream& operator>>(istream& is, var_int &obj); 
     friend ostream& operator>>(ostream& is, const var_int &obj); 
+    bool operator==(const var_int &other) const;
 };
 
  bool operator<(const var_int &a, const var_int &b) {
@@ -114,9 +116,28 @@ ostream& operator<<(ostream &os, const var_int &obj) {
     return os;
 }
 
-int main() {
-    var_int n1, n2;
-    cin >> n1 >> n2;
-    cout << "Sum of arbitary size ints in C++\n";
-    cout << n1 + n2 << endl;
+bool var_int::operator==(const var_int &other) const {
+    //  Need to debug.
+    int zero_a = 0, zero_b = 0;
+
+    while (zero_a < size() && at(zero_a) == 0)  zero_a++;
+    while (zero_a < other.size() && other.at(zero_b) == 0)  zero_b++;
+
+    bool answer = true;
+
+    if ( zero_a == size() && zero_b == other.size() ) {
+        return true;
+    }
+    else if ( ( size() - zero_a ) != ( other.size() - zero_b ) ) {
+        return false;
+    }
+
+    else {
+        for (; zero_a < size(); ++zero_a, ++zero_b) {
+            answer &= (at(zero_a) == other.at(zero_b));
+            if ( ! answer ) break;
+        }
+    }
+
+    return answer;
 }

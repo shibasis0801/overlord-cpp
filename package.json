@@ -8,7 +8,8 @@
   },
   "scripts": {
     "buildDoc": "node scripts/buildDocumentation.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "bash scripts/tester.sh",
+    "clean": "rm -rf output/*"
   },
   "repository": {
     "type": "git",
