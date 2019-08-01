@@ -24,8 +24,8 @@
 #include <type_traits>
 #include <initializer_list>
 
-#include "print.hpp"
-#include "macro.hpp"
+#include "../include/print.hpp"
+#include "../include/macro.hpp"
 
 using namespace std;
 
@@ -113,7 +113,7 @@ int main() {
 
     test.map([](int i) {return i;})
         .mapInPlace([](int i) {return i*i;})
-        .mapInPlace([](int i) {return i*i;})
+        .mapInPlace([](int i) {return i*2;})
         .mapIndexed([=](int idx, int item) -> pair<int, int> { return pair(idx, item); })
         .forEach([=](pair<int, int> p) {
             auto [idx, item] = p;

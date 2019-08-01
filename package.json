@@ -8,8 +8,11 @@
   },
   "scripts": {
     "buildDoc": "node scripts/buildDocumentation.js",
+    "buildHeader": "python scripts/buildHeader.py",
     "test": "bash scripts/tester.sh",
-    "clean": "rm -rf output/*"
+    "clean": "rm -rf output/*",
+    "build": "bash scripts/build.sh",
+    "rebuild": "npm run clean && npm run build"
   },
   "repository": {
     "type": "git",

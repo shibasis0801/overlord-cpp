@@ -7,7 +7,13 @@
 #include <iterator>
 
 using namespace std;
+/*
+x = stream(all(vector))
+    .map(square)
+    .filter(isEven)
+    .reduce(summer)
 
+*/
 namespace ovd {
 
 
