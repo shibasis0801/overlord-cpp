@@ -22,6 +22,7 @@
 #include <iostream>
 #include <functional>
 #include <type_traits>
+#include <numeric>
 #include <initializer_list>
 
 #include "../include/print.hpp"
@@ -48,7 +49,11 @@ struct functional_vector {
     functional_vector<value_type> copy() {
         return functional_vector<value_type>(data);
     }
-        
+    
+    void push_back(value_type item) {
+        data.push_back(item);
+    }
+
     template<
         typename unary_function, 
         typename result_type = typename result_of<unary_function&(value_type)>::type
@@ -74,11 +79,20 @@ struct functional_vector {
     }
 
     template<
-        typename unary_function, 
-        typename result_type = typename std::result_of<unary_function&(int, value_type)>::type
+        typename binary_function,
+        typename result_type
+        >
+    result_type 
+    reduce(const binary_function &accumulator, result_type init) {
+        return accumulate(all(data), init, accumulator);
+    }
+
+    template<
+        typename binary_function, 
+        typename result_type = typename std::result_of<binary_function&(int, value_type)>::type
         >
     functional_vector<result_type> 
-    mapIndexed(const unary_function &apply) {
+    mapIndexed(const binary_function &apply) {
 
         functional_vector<result_type> result;
         
@@ -94,16 +108,22 @@ struct functional_vector {
         
         functional_vector<value_type> result;
 
-        for ( value_type item : data )
-            if (test(item)) 
+        for ( value_type item : data ) 
+            if (test(item))
                 result.push_back(item);
 
         return result;
-
     }
+
+
     
     void forEach(const function<void(value_type)> &perform) {
         for_each(all(data), perform);
+    }
+
+    functional_vector<value_type> forEachChainable(const function<void(value_type)> &perform) {
+        for_each(all(data), perform);
+        return *this;
     }
 };
 
@@ -111,14 +131,21 @@ int main() {
     
     functional_vector<int> test = { 1, 2, 3, 4, 5 };
 
-    test.map([](int i) {return i;})
-        .mapInPlace([](int i) {return i*i;})
-        .mapInPlace([](int i) {return i*2;})
-        .mapIndexed([=](int idx, int item) -> pair<int, int> { return pair(idx, item); })
-        .forEach([=](pair<int, int> p) {
-            auto [idx, item] = p;
-            ovd::println("Idx :", idx, "has Value :", item);
-        });
+    auto text = 
+        test.map([](int i) {return i;})
+            .mapInPlace([](int i) {return i*i;})
+            .filter([](int i) -> bool { return i % 2 == 0; })
+            .mapInPlace([](int i) {return i*2;})
+            .mapIndexed([=](int idx, int item) -> pair<int, int> { return pair(idx, item); })
+            // .forEachChainable([=](pair<int, int> p) {
+            //     auto [idx, item] = p;
+            //     ovd::println("Idx :", idx, "has Value :", item);
+            // })
+            .reduce([] (string acc, pair<int, int> i) -> string {
+                return acc + to_string(i.first) + to_string(i.second);
+            }, string(""));
+    
+    ovd::println(text);
 }
 
 /*
