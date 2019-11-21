@@ -1,6 +1,7 @@
 #ifndef RANGE_HPP
 #define RANGE_HPP
 
+// Compile Time Duck Typing
 namespace ovd {
     struct range {
         int start;
