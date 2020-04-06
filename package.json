@@ -7,6 +7,7 @@
     "doc": "docs"
   },
   "scripts": {
+    "install": "echo write a script to generate bash function and insert into bash rc",
     "buildDoc": "node scripts/buildDocumentation.js",
     "buildHeader": "python scripts/buildHeader.py",
     "test": "bash scripts/tester.sh",
